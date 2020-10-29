@@ -9,7 +9,6 @@ Contract.make {
                 "text": "just a text"
         ])
     }
-//    nie widzę możliwości by sprawdzić kilka wiadomości na wyjściu.
     outputMessage {
         sentTo("myOutputExchange1")
         body([
