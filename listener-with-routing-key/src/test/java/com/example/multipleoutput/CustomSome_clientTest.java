@@ -16,14 +16,13 @@ import static org.springframework.cloud.contract.verifier.assertion.SpringCloudC
 import static org.springframework.cloud.contract.verifier.messaging.util.ContractVerifierMessagingUtil.headers;
 
 /**
- * Kopia testu wygenerowanego z kontraktu.
+ * Copy of a test generated from contract.
  * @see Some_clientTest
- * Dodałem @RepeatedTest(10) by lepiej było widać problem z routing key.
- * Stub ze Spring Cloud Stream
+ * Added @RepeatedTest(10) to beter visualise routing key issue.
+ * TestBiner from Spring Cloud Stream
  * @see TestChannelBinderConfiguration
- * Jest jeden dla Kafki i RabbitMQ, nie obsługuje AMQP routing key (tak mi sie przynajmniej wydaje).
- * Z tego powodu wiadomości lecą do niewłaściwego konsumenta, losowego podpiętego pod ten sam echange.
- * Da się to przetestować bez fizycznego RabbitMQ? W pamieci, konterze, jakiegokolwiek.
+ * As routing key is ignored messages are routed in round robin fashion.
+ * In this example half of test is failing because is reaching incorrect listener.
  */
 @SuppressWarnings("rawtypes")
 public class CustomSome_clientTest extends MessagingContractBase {
