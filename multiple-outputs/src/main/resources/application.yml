@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    function:
+      definition: inputMessageProcessor
+    stream:
+      bindings:
+        inputMessageProcessor-in-0:
+          destination: myInputExchange
+          group: messageProcessorGroup
+        inputMessageProcessor-out-0:
+          destination: myOutputExchange1
+        inputMessageProcessor-out-1:
+          destination: myOutputExchange2

@@ -1,0 +1,30 @@
+spring:
+  cloud:
+    function:
+      definition: inputMessageProcessor;additionalInputMessageProcessor
+    stream:
+      bindings:
+        inputMessageProcessor-in-0:
+          destination: myInputExchange
+          group: messageProcessorGroup
+        additionalInputMessageProcessor-in-0:
+          destination: myInputExchange
+          group: additionalMessageProcessorGroup
+        inputMessageProcessor-out-0:
+          destination: myOutputExchange
+        additionalInputMessageProcessor-out-0:
+          destination: myOutputExchange
+      rabbit:
+        bindings:
+          inputMessageProcessor-in-0:
+            consumer:
+              bindingRoutingKey: messages
+          additionalInputMessageProcessor-in-0:
+            consumer:
+              bindingRoutingKey: additionalMessages
+          inputMessageProcessor-out-0:
+            producer:
+              routingKeyExpression: "'processedMessages'"
+          additionalInputMessageProcessor-out-0:
+            producer:
+              routingKeyExpression: "'processedAdditionalMessages'"
